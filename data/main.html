@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./static/css/main.css">
+    <script src="./static/js/main.js" defer></script>
+    <title>LED App</title>
+</head>
+<body>
+    <h2>LED App</h2> 
+    <form action="/full_color" method="post" id="full-color-form">
+        <input type="number" name="r" id="r" min="0" max="255" step="1">
+        <input type="number" name="g" id="g" min="0" max="255" step="1">
+        <input type="number" name="b" id="b" min="0" max="255" step="1">
+        <button type="submit">Change Color</button>
+    </form>
+</body>
+</html>
