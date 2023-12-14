@@ -39,10 +39,7 @@ void setup() {
 
     // server routes
 
-    server.on("/", HTTP_GET, [](AsyncWebServerRequest *request) {
-        request->send(SPIFFS, "/main.html");
-    });
-
+    // STATICS
     server.on("/static/css/main.css", HTTP_GET, [](AsyncWebServerRequest *request) {
         request->send(SPIFFS, "/static/css/main.css", "text/css");
     });
@@ -50,11 +47,43 @@ void setup() {
         request->send(SPIFFS, "/static/js/main.js", "application/javascript");
     });
 
+    // GET
+    server.on("/", HTTP_GET, [](AsyncWebServerRequest *request) {
+        request->send(SPIFFS, "/main.html");
+    });
+
+    // POST
+    server.on("/full-color", HTTP_POST, [](AsyncWebServerRequest *request) {
+        
+        int r, g, b = 0;
+
+        if (request->hasParam("r", true))
+            r = request->getParam("r", true)->value().toInt();
+        if (request->hasParam("g", true)) 
+            g = request->getParam("g", true)->value().toInt();
+        if (request->hasParam("b", true))
+            b = request->getParam("b", true)->value().toInt();
+
+        full_color(strip, NUM_PIXELS, r, g, b);
+
+        request->redirect("/");
+    });
+
+    server.on("/brightness", HTTP_POST, [](AsyncWebServerRequest *request) {
+        int brightness = 0;
+
+        if (request->hasParam("brightness", true))
+            brightness = request->getParam("brightness", true)->value().toInt();
+
+
+
+        request->redirect("/");
+    });
+
     // server routes end
 
     server.begin();
 }
-
 
 void loop() {
 

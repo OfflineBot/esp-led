@@ -7,3 +7,8 @@ void full_color(Adafruit_NeoPixel strip, uint8_t strip_length, uint8_t r, uint8_
     }
     strip.show();
 }
+
+void set_brightness(Adafruit_NeoPixel strip, int brightness) {
+    strip.setBrightness(brightness);
+    strip.show();
+}
