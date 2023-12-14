@@ -20,3 +20,73 @@ form {
     justify-content: center;
     align-items: center;
 }
+
+h2 {
+    text-decoration: underline;
+}
+
+.slider {
+    width: 250px;
+    height: 10px;
+    margin: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.red-slider::-moz-range-thumb {
+    background: rgb(0, 0, 0);
+}
+.red-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: red;
+}
+.red-slider::-moz-range-track {
+    background-color: red;
+    height: 10px;
+    border-radius: 4px;
+}
+.red-slider::-webkit-slider-runnable-track {
+    background-color: red;
+    height: 10px;
+    border-radius: 4px;
+}
+
+.blue-slider::-moz-range-thumb {
+    background: rgb(0, 0, 0);
+}
+.blue-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: blue;
+}
+.blue-slider::-moz-range-track {
+    background-color: blue;
+    height: 10px;
+    border-radius: 4px;
+}
+.blue-slider::-webkit-slider-runnable-track {
+    background-color: blue;
+    height: 10px;
+    border-radius: 4px;
+}
+
+.green-slider::-moz-range-thumb {
+    background: rgb(0, 0, 0);
+}
+.blue-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: green;
+}
+.green-slider::-moz-range-track {
+    background-color: green;
+    height: 10px;
+    border-radius: 4px;
+}
+.green-slider::-webkit-slider-runnable-track {
+    background-color: green;
+    height: 10px;
+    border-radius: 4px;
+}
+

@@ -75,7 +75,7 @@ void setup() {
         if (request->hasParam("brightness", true))
             brightness = request->getParam("brightness", true)->value().toInt();
 
-
+        set_brightness(strip, brightness);
 
         request->redirect("/");
     });
