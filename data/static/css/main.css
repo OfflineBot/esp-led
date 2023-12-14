@@ -21,6 +21,15 @@ form {
     align-items: center;
 }
 
+#preview-color {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 4px solid;
+    padding: 10px;
+}
+
 h2 {
     text-decoration: underline;
 }

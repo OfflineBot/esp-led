@@ -10,12 +10,14 @@
 <body>
     <h2>LED App</h2> 
     <form action="/full-color" method="post" id="full-color-form">
+        <div id="preview-color">
 
-        <input type="range" name="r" class="slider red-slider" min="0" max="255" step="1" value="0">
-        <input type="range" name="g" class="slider green-slider" min="0" max="255" step="1" value="0">
-        <input type="range" name="b" class="slider blue-slider" min="0" max="255" step="1" value="0">
-        
-        <button type="submit">Change Color</button>
+            <input type="range" name="r" class="slider red-slider" min="0" max="255" step="1" value="0">
+            <input type="range" name="g" class="slider green-slider" min="0" max="255" step="1" value="0">
+            <input type="range" name="b" class="slider blue-slider" min="0" max="255" step="1" value="0">
+                
+            <button type="submit">Change Color</button>
+        </div>
     </form>
 </body>
 </html>
