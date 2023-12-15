@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./static/css/main.css">
     <script src="./static/js/main.js" defer></script>
-    <title>LED App</title>
+    <title>LED Controller</title>
 </head>
 <body>
-    <h2>LED App</h2> 
+    <h2>LED Controller</h2> 
     <form action="/full-color" method="post" id="full-color-form">
         <div id="preview-color">
 
@@ -20,7 +20,7 @@
         </div>
     </form>
     <form action="/brightness" method="post">
-        <input type="range" name="brightness" class="slider brighness-slider" min="0" max="255" step="1" value="255">
+        <input type="range" name="brightness" class="slider brightness-slider" min="0" max="255" step="1" value="255">
 
         <button type="submit" id="change-brightness-btn">Change Brightness</button>
     </form>

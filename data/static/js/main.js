@@ -1,28 +1,36 @@
 let red = document.querySelector('.red-slider');
 let green = document.querySelector('.green-slider');
 let blue = document.querySelector('.blue-slider');
+let brightness = document.querySelector('.brightness-slider')
 let preview = document.getElementById('preview-color');
 
 let red_val = red.value;
 let green_val = green.value;
 let blue_val = blue.value;
+let brightness_val = 255;
 
 render_preview();
+
+let day_save = 1;
 
 red.addEventListener('input', (event) => {
     red_val = red.value;
     render_preview();
-    setCookie("red", red_val, 1, "None");
+    setCookie("red", red_val, day_save, "None");
 });
 green.addEventListener('input', (event) => {
     green_val = green.value;
     render_preview();
-    setCookie("green", green_val, 1, "None");
+    setCookie("green", green_val, day_save, "None");
 });
 blue.addEventListener('input', (event) => {
     blue_val = blue.value;
     render_preview();
-    setCookie("blue", blue_val, 1, "None");
+    setCookie("blue", blue_val, day_save, "None");
+});
+brightness.addEventListener('input', (event) => {
+    brightness_val = brightness.value; 
+    setCookie("brightness", brightness_val, day_save, "None");
 });
 
 function rgbToHex(red, green, blue) {
@@ -82,12 +90,16 @@ window.onload = function() {
     let red_value = getCookie("red");
     let green_value = getCookie("green");
     let blue_value = getCookie("blue"); 
+    let brightness_value = getCookie("brightness");
 
     red.value = red_value;
     green.value = green_value;
     blue.value = blue_value; 
+    brightness.value = brightness_value;
+
     red_val = red_value;
     green_val = green_value;
     blue_val = blue_value;
+    brightness_val = brightness_value;
     render_preview();
 };

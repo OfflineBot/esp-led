@@ -26,9 +26,14 @@ form {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 4px solid;
+    border: 5px solid;
     padding: 10px;
     border-radius: 5px;
+}
+
+input[type="range"] {
+    margin-bottom: 20px;
+    margin-top: 10px;
 }
 
 button {
