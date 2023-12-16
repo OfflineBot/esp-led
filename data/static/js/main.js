@@ -16,21 +16,21 @@ let day_save = 1;
 red.addEventListener('input', (event) => {
     red_val = red.value;
     render_preview();
-    setCookie("red", red_val, day_save, "None");
+    setLocalStorage("red", brightness_val);
 });
 green.addEventListener('input', (event) => {
     green_val = green.value;
     render_preview();
-    setCookie("green", green_val, day_save, "None");
+    setLocalStorage("green", brightness_val);
 });
 blue.addEventListener('input', (event) => {
     blue_val = blue.value;
     render_preview();
-    setCookie("blue", blue_val, day_save, "None");
+    setLocalStorage("blue", brightness_val);
 });
 brightness.addEventListener('input', (event) => {
     brightness_val = brightness.value; 
-    setCookie("brightness", brightness_val, day_save, "None");
+    setLocalStorage("brightness", brightness_val);
 });
 
 function rgbToHex(red, green, blue) {
@@ -54,43 +54,18 @@ function render_preview() {
 }
 
 
-function setCookie(name, value, days, sameSite) {
-    var expires = "";
-    if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        expires = "; expires=" + date.toUTCString();
-    }
-
-    var sameSiteAttribute = sameSite ? "; SameSite=" + sameSite : "";
-
-    // Include "Secure" attribute when SameSite is set to "None"
-    var secureAttribute = sameSite === "None" ? "; Secure" : "";
-
-    document.cookie = name + "=" + value + expires + "; path=/" + sameSiteAttribute + secureAttribute;
+function setLocalStorage(key, value) {
+    localStorage.setItem(key, value);
 }
-
-function getCookie(name) {
-    var nameEQ = name + "=";
-    var cookies = document.cookie.split(';');
-    for (var i = 0; i < cookies.length; i++) {
-        var cookie = cookies[i];
-        while (cookie.charAt(0) === ' ') {
-            cookie = cookie.substring(1, cookie.length);
-        }
-        if (cookie.indexOf(nameEQ) === 0) {
-            return cookie.substring(nameEQ.length, cookie.length);
-        }
-    }
-    return 0;
+function getLocalStorage(key) {
+    return localStorage.getItem(key);
 }
-
 
 window.onload = function() {
-    let red_value = getCookie("red");
-    let green_value = getCookie("green");
-    let blue_value = getCookie("blue"); 
-    let brightness_value = getCookie("brightness");
+    let red_value = getLocalStorage("red");
+    let green_value = getLocalStorage("green");
+    let blue_value = getLocalStorage("blue"); 
+    let brightness_value = getLocalStorage("brightness");
 
     red.value = red_value;
     green.value = green_value;
