@@ -11,22 +11,20 @@ let brightness_val = 255;
 
 render_preview();
 
-let day_save = 1;
-
 red.addEventListener('input', (event) => {
     red_val = red.value;
     render_preview();
-    setLocalStorage("red", brightness_val);
+    setLocalStorage("red", red_val);
 });
 green.addEventListener('input', (event) => {
     green_val = green.value;
     render_preview();
-    setLocalStorage("green", brightness_val);
+    setLocalStorage("green", green_val);
 });
 blue.addEventListener('input', (event) => {
     blue_val = blue.value;
     render_preview();
-    setLocalStorage("blue", brightness_val);
+    setLocalStorage("blue", blue_val);
 });
 brightness.addEventListener('input', (event) => {
     brightness_val = brightness.value; 
@@ -62,19 +60,15 @@ function getLocalStorage(key) {
 }
 
 window.onload = function() {
-    let red_value = getLocalStorage("red");
-    let green_value = getLocalStorage("green");
-    let blue_value = getLocalStorage("blue"); 
-    let brightness_value = getLocalStorage("brightness");
+    red_val = getLocalStorage("red");
+    green_val = getLocalStorage("green");
+    blue_val = getLocalStorage("blue"); 
+    brightness_val = getLocalStorage("brightness");
 
-    red.value = red_value;
-    green.value = green_value;
-    blue.value = blue_value; 
-    brightness.value = brightness_value;
+    red.value = red_val;
+    green.value = green_val;
+    blue.value = blue_val; 
+    brightness.value = brightness_val;
 
-    red_val = red_value;
-    green_val = green_value;
-    blue_val = blue_value;
-    brightness_val = brightness_value;
     render_preview();
 };
