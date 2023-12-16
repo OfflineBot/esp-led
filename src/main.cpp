@@ -18,10 +18,26 @@ const uint8_t PIN = 25;
 AsyncWebServer server(80);
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_PIXELS, PIN, NEO_GRB + NEO_KHZ800);
 
+// current route: https://192.168.188.50
+// routing: POST: /brightness json("brightness") // min 0 - max 255
+// routing: POST: /full_color json("r", "g", "b") // min 0 - max 255
+
+void full_color(uint8_t r, uint8_t g, uint8_t b) {
+    for (int i = 0; i < NUM_PIXELS; i++) {
+        strip.setPixelColor(i, r, g, b);
+    }
+    strip.show();
+}
+
+void set_brightness(int brightness) {
+    strip.setBrightness(brightness);
+    strip.show();
+}
+
 void setup() {
 
     Serial.begin(9600);
-
+    Serial.println("Connected to ESP");
     if(!SPIFFS.begin(true)) {
         Serial.println("Cant connect to SPIFFS!");
         return;
@@ -52,10 +68,19 @@ void setup() {
         request->send(SPIFFS, "/main.html");
     });
 
+    server.on("/full-color", HTTP_GET, [](AsyncWebServerRequest *request) {
+        Serial.println("full color request");
+        request->send(SPIFFS, "/main.html");
+    });
+    server.on("/brightness", HTTP_GET, [](AsyncWebServerRequest *request) {
+        Serial.println("brightness request"); 
+        request->send(SPIFFS, "/main.html");
+    });
+
     // POST
     server.on("/full-color", HTTP_POST, [](AsyncWebServerRequest *request) {
         
-        int r, g, b = 0;
+        int r = 0, g = 0, b = 0;
 
         if (request->hasParam("r", true))
             r = request->getParam("r", true)->value().toInt();
@@ -65,7 +90,7 @@ void setup() {
             b = request->getParam("b", true)->value().toInt();
 
         full_color(strip, NUM_PIXELS, r, g, b);
-
+        Serial.println("changed colors");
         request->redirect("/");
     });
 
@@ -86,5 +111,5 @@ void setup() {
 }
 
 void loop() {
-
+    // unused loop
 }
