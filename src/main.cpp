@@ -7,8 +7,6 @@
 #include <WiFi.h>
 #include <SPIFFS.h>
 
-#include "neopixel.hpp"
-
 const char* ssid = "WIFI@DB";
 const char* password = "OfflineBot";
 
@@ -44,9 +42,11 @@ void setup() {
     }
 
     WiFi.begin(ssid, password);
-    Serial.println("Connecting to WiFi");
-    while(WiFi.status() != WL_CONNECTED) 
+    Serial.print("Connecting to WiFi");
+    while(WiFi.status() != WL_CONNECTED) {
         Serial.print(".");
+        delay(500);
+    }
     Serial.print("\nWiFi Connected: "); Serial.println(WiFi.localIP());
 
     strip.begin();
@@ -70,11 +70,11 @@ void setup() {
 
     server.on("/full-color", HTTP_GET, [](AsyncWebServerRequest *request) {
         Serial.println("full color request");
-        request->send(SPIFFS, "/main.html");
+        request->redirect("/");
     });
     server.on("/brightness", HTTP_GET, [](AsyncWebServerRequest *request) {
         Serial.println("brightness request"); 
-        request->send(SPIFFS, "/main.html");
+        request->redirect("/");
     });
 
     // POST
@@ -89,8 +89,7 @@ void setup() {
         if (request->hasParam("b", true))
             b = request->getParam("b", true)->value().toInt();
 
-        full_color(strip, NUM_PIXELS, r, g, b);
-        Serial.println("changed colors");
+        full_color(r, g, b);
         request->redirect("/");
     });
 
@@ -100,7 +99,7 @@ void setup() {
         if (request->hasParam("brightness", true))
             brightness = request->getParam("brightness", true)->value().toInt();
 
-        set_brightness(strip, brightness);
+        set_brightness(brightness);
 
         request->redirect("/");
     });
